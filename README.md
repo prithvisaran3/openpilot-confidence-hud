@@ -7,7 +7,8 @@ without being intrusive.
 It is a running prototype rather than a mockup. The whole HUD is a pure function of a simulated
 telemetry stream, so you can scrub a 60-second scripted drive and study any frame of it.
 
-**[Live demo →](#)** · Press `space` to play/pause, `←`/`→` to step, `R` to restart.
+**[Live demo → openpilot-confidence-hud.vercel.app](https://openpilot-confidence-hud.vercel.app)**
+· Press `space` to play/pause, `←`/`→` to step, `R` to restart.
 
 ---
 
