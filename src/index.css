@@ -1,0 +1,68 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens.
+ *
+ * The comma 3X renders its UI through Qt, so this prototype deliberately limits
+ * itself to what Qt can paint cheaply at 60fps on an embedded GPU: solid fills,
+ * flat strokes, linear gradients, and opacity. No blur, no box-shadow, no
+ * backdrop-filter, no 3D transforms anywhere in this codebase.
+ */
+@theme {
+  --color-hud-bg: #07090b; /* near-black: the device sits against a bright windshield */
+  --color-hud-panel: #10141a;
+  --color-hud-line: #1d232c;
+  --color-hud-ink: #e8edf4;
+  --color-hud-dim: #6b7684;
+
+  --font-hud: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-hud-bg);
+  color: var(--color-hud-ink);
+  font-family: var(--font-hud);
+  /* Fixed-viewport automotive display: the page itself must never scroll. */
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: inherit;
+}
+
+/*
+ * Single shared attention pulse. One keyframe, opacity-only, so Qt would render
+ * it as a cheap property animation rather than a repaint of a blurred layer.
+ */
+@keyframes hud-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.28;
+  }
+}
+
+.hud-pulse {
+  animation: hud-pulse 0.9s ease-in-out infinite;
+}
+
+.hud-pulse-slow {
+  animation: hud-pulse 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hud-pulse,
+  .hud-pulse-slow {
+    animation: none;
+  }
+}
